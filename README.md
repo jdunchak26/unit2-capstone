@@ -1,5 +1,6 @@
 Architecture:
 
+```
 User Query (CLI)
       │
       ▼
@@ -31,6 +32,7 @@ User Query (CLI)
                  │
                  ▼
         Response to User
+```
 
 
 Setup and Usage Instructions:
@@ -41,14 +43,20 @@ The company is called "Northstar Services". The information below is all hypothe
 Data sources
 
 Documents:
-There are 4 documents that were ingested into the agent. 
-    1. A consulting report for the hyptohetical client "Meridian Home Products"
-    2. Northstar Services Customer complaint policy
-    3. Northstar Services Employee complaint policy
-    4. An employee Human Resources report
+There are 3 documents that were ingested into the agent. 
+    1. Northstar Services Customer complaint policy
+    2. Northstar Services Employee complaint policy
+    3. An employee Human Resources report
+
+The documents must be ingested by running the ingest.py script. This script chunks the documents into information for the qualitative agent. 
+
 
 SQL Table:
-The table is generated from the script "setup_database.py" and contains information about employees, customers, and other stuff. 
+The table is generated from the script "setup_database.py" and contains information about employees, customers, and sales. This is what the quantitative agent reads. 
+
+Testing:
+
+test_qual and test_quant were both testing scripts to confirm that the script was able to connect to Gemini and successfully query information.
 
 
 Trust-but-verify
