@@ -79,22 +79,15 @@ Query 2
 
 Query 3
 
-    1. Insert a new company called Jonah Company into the database (Quantative)
-    2. Gemini blocked the result due the validation layer flagging this as a blocked query.
-    3. The validation layer flagged this as the user attempting to insert a new row into the customers table. In the validation guidelines, the SQL INSERT function is blocked, which this successfully recognized and blocked. 
-    4. I was ok with this result. It blocked the query as expected. 
-
-Query 4
-
     1. What is the Northstar Services Promotion Policy? (Qualitative)
     2. Gemini returned that it was unable to find the information in the provided documents. 
     3. The validation successfully flagged that there is no promotion policy in the documents, and returned the appropriate answer.
     4. I accepted this answer. I asked a question that I knew was not possible for Gemini to answer in order to see the output that it returned, and it 
     returned the proper response of the information not being found.
 
-Query 5
+Query 4
 
-    1. Who submitted the workplace complaint, and what is our average employee satisfaction score and who was the lowest? (Both)
+    1. Who submitted the workplace complaint, and what is our average employee satisfaction score and what was the lowest? (Both)
     2. Gemini was able to return the proper answers. 
         For the qualitative portion, it provided who submitted the workplace complaint (employee 4), and said that it did not have the average 
         employee satisfaction score in the documents. 
@@ -103,9 +96,9 @@ Query 5
     3. The validation layer flagged that it did not have access to the average satisfaction score in the documents and did not calculate a score. 
     4. I do like these answers. It was able to successfully flag where the answers were not available.
 
-Query 6
+Query 5
 
-    1. Analyze our employee satifaction score and their revenue. Is there a connection? (Quantitative)
+    1. Analyze our average employee satifaction score and their revenue. Is there a connection? (Quantitative)
     2. Gemini was able to return the average satisfaction scores as well are there revenue. It was also able to analyze the output, and provide 
         an analysis of the results. What it said is below:
 
@@ -115,6 +108,28 @@ Query 6
 
     3. The validation layer did not flag anything. 
     4. This answer was good for me. It was able to analyze the data and provide an output that I thought made sense. 
+
+Query 6
+
+    1. What is our employee complaint policy, and which employee submitted the report? (both)
+    2. Gemini returned both a qualitative and a quantitative result, which is not what I really wanted. It was able to successfully reply to the complaint policy
+    and who submitted the report, but it should not have gone looking in the database.
+    3. The validation for the SQL worked since it thought the question wasn't a select statement. 
+    4. I was ok with the output.
+    5. I did not trust the fact that it tried to find an answer in the database since there was no mathetmatical component to the question. In order to resolve this, I went to change the definition of the classify function in the manager.py script. I expanded it to be more comprehensive, and upon running this query again, it correctly categorized it as qualitative. I did realize this change made it so that prompts must be specific with what they are asking for. Prior, I could be relatively loose with some prompts and it would occasionally interpret it correctly, but now it is better to be precise. 
+
+
+Query 7
+
+    1. Insert a company called Jonah company into the database
+    2. Gemini blocked the query since it was an insert and failed the validation.
+    3. The validation worked as intended and failed the prompt so the user could not insert new rows into the database. 
+    4. I accepted this result. I had to go into manager.py file and update some of the quantitative categorization logic since it kept thinking
+    that "UPDATE" was qualitative. 
+
+
+
+
 
 
 
